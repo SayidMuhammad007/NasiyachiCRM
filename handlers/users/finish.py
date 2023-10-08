@@ -138,6 +138,10 @@ Mahsulot narxi: {a_data[28]}
 Nasiya narx: {a_data[35]}
 Oylik to'lov: {a_data[36]}
 Buyurtma holati: 🟡 rasmiylashtirilmoqda
+
+📎 Fayllar:
+Mijozni mahsulot bilan tushgan rasmi:{'<b>' + a_data[80] + '</b>' if len(a_data) > 80 else ''}
+Shartnoma skrinshoti: {'<b>' + a_data[81] + '</b>' if len(a_data) > 81 else ''}
                     """
     await message.answer(text=msg, reply_markup=confirmBtn())
     await Save.confirm.set()

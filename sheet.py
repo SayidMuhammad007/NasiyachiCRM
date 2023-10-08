@@ -98,7 +98,7 @@ async def find_orders(value_to_find, cur, table, user_id):
         service = getCreds()
         sheets = service.spreadsheets()
         status = None
-        result = sheets.values().get(spreadsheetId=SPREADSHEET_ID, range=f'{table}!A3:CC').execute()
+        result = sheets.values().get(spreadsheetId=SPREADSHEET_ID, range=f'{table}!A3:CD').execute()
         values = result.get('values', [])
         data = []
         if user_id == None:

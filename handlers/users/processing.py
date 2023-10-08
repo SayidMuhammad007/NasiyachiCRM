@@ -31,6 +31,10 @@ Oylik to'lov: <b>{check[35]}</b>
 Buyurtma holati: <b>{check[1]}</b> 
 Sana va vaqt: <b>{check[4]}</b>,<b>{check[77]}</b> 
 
+📎 Fayllar:
+Mijozni mahsulot bilan tushgan rasmi: <b>{check[80]}</b> 
+Shartnoma skrinshoti: {'<b>' + check[81] + '</b>' if len(check) > 81 else ''}
+
 🏢 Do'kon:
 Nomlanishi:<b>{check[21]}</b>
 Call-center: <b>{check[20]}</b>
