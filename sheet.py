@@ -245,7 +245,7 @@ async def addData(values, table):
                     valueInputOption="RAW",
                     body={"values": data}
                 ).execute()
-            return True
+            return True, next_empty_row-2
         else:
             print('error: No empty rows found')
     except HttpError as error:
