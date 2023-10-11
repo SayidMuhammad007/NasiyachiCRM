@@ -9,12 +9,18 @@ async def bot_echo(message: types.Message):
     data1 = await getData2(value_to_find=message.from_user.id, cur=4, table='👥 Xodimlar')
     data = data1[0]
     msg = f"""
-ISM, FAMILIYA VA SHARIFINGIZ: <b>{data[1]}</b>
+👤 Xodim:
+• Ism: <b>{data[1]}</b> 
+• Telefon: <b>{data[2]}</b> 
+• Lavozim: <b>{data[7]}</b> 
 
-Umumiy daromadingiz: <b>{data[8]}</b>
+💰 Daromadlar:
+— Sotuv: <b>{data[14]}</b> 
+— Hamkorlik: <b>{data[21]}</b> 
+— Xizmatlar: <b>{data[22]}</b> 
 
-Umumiy yechib berildi: <b>{data[14]}</b>
-
-Joriy balans: <b>{data[15]}</b>
+• Umumiy: <b>{data[9]}</b> 
+• To'landi: <b>{data[15]}</b> 
+• Balans: <b>{data[16]}</b> 
     """
     await message.answer(text=msg)
