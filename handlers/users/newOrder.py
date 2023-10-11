@@ -270,7 +270,7 @@ Call-center: <b>{check[20]}</b>
         await bot.send_message(
             chat_id=callback.message.chat.id,
             text=msg,
-            reply_markup=btn1(selected_order_id)
+            reply_markup=btn1(selected_order_id[1])
         )
 
         await loading_message.delete()
