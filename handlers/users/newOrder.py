@@ -256,6 +256,7 @@ Mahsulot nomi: <b>{check[22]}</b>
 Mahsulot narxi: <b>{check[28]}</b> 
 Nasiya narx: <b>{check[34]}</b> 
 Oylik to'lov: <b>{check[35]}</b> 
+Bo’lib to’lash muddati:: <b>{check[23]}</b> 
 Buyurtma holati: <b>{check[1]}</b> 
 Sana va vaqt: <b>{check[4]}</b>,<b>{check[77]}</b> 
 
