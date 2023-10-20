@@ -4,7 +4,7 @@ from aiogram.contrib.middlewares.logging import LoggingMiddleware
 from aiogram.types import ParseMode
 
 from loader import bot
-from sheet import find_orders, add_row
+from sheet import find_orders, add_row, getData, getData1
 
 USER_ID = 5333351384
 
@@ -16,28 +16,23 @@ async def send_notification(user_id, message_text):
 
 # Monitor the database for new entries
 async def monitor_database():
-    while True:
-        print("s")
-        new_entry = await find_orders(0, 79, "📒 Buyurtmalar", user_id=None)
-        if new_entry:
-            for i in new_entry[0]:
-                print(i)
-                status = "#YANGI_BUYURTMA"
-                msg = f"""
-                {status}
+    data = await getData1(value_to_find=1, cur=52, table="🏢 Hamkor-do'konlar")
+    print(data)
+    logging.exception("Sending...")
+    if data:
+        text = f"""
+Hamkorga xabar boradi: “🥳 Tabriklaymiz! Sizga hamkorlik uchun ruxsat berildi. Botning to’liq imkoniyatlaridan foydalanishingiz mumkin!
 
-                👤 Mijoz ma’lumotlari:
+👤 Siz uchun biriktirilgan menejer:
+Menejer: Zikrulloh Ikromov
+Telefon raqam: 991707849
+Telegram: @ikromoffjr
 
-                Mijoz familiya, ism va sharifi: <b>{i[7]}</b>
-                Mijoz yoshi: <b>{i[15]}</b>
-                🏢 Do’kon ma’lumotlari:
+😉 Savollar bo’lsa, menejeringizga murojaat qilishingiz mumkin!”
+"""
+        await send_notification(data[0][5], text)
+        await add_row([["BA", int(data[0][0]) + 3, 0]], table="🏢 Hamkor-do'konlar")
+        logging.exception("Sended")
+    else:
+        logging.exception("Nothing to send")
 
-                Buyurtmachi do’kon: <b>{i[21]}</b>
-                ℹ️ Buyurtma ma’lumotlari:
-
-                Buyurtma sanasi:<b>{i[4]}</b>
-                Buyurtma vaqti: 
-                    """
-                await send_notification(USER_ID, msg)
-                await add_row([["CB", 79, 1]])
-        # You can add a sleep or polling mechanism here to check for new entries periodically

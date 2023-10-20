@@ -46,20 +46,19 @@ async def getData(value_to_find, cur, table):
 
 async def getData1(value_to_find, cur, table):
     try:
-        service = getCreds()
+        service = getCreds()  # Assuming getCreds() is defined correctly
         sheets = service.spreadsheets()
         result = sheets.values().get(spreadsheetId=SPREADSHEET_ID, range=f'{table}!A:CC').execute()
         values = result.get('values', [])
         data = []
         for row in values:
-            if row  and str(row[cur]) == str(value_to_find):
+            if len(row) > cur and str(row[cur]) == str(value_to_find):
                 data.append(row)
         print(data)
         return data
     except HttpError as error:
         print(f"Error finding row: {error}")
         return None
-
 
 async def getData2(value_to_find, cur, table):
     try:
@@ -82,10 +81,10 @@ async def getAll(table):
     try:
         service = getCreds()
         sheets = service.spreadsheets()
-        result = sheets.values().get(spreadsheetId=SPREADSHEET_ID, range=f'{table}!A3:BZ').execute()
+        result = sheets.values().get(spreadsheetId=SPREADSHEET_ID, range=f'{table}!A3:DN').execute()
         values = result.get('values', [])
         data = []
-        for row in values:
+        for row in reversed(values):
             if row:
                 data.append(row)
         return data
@@ -142,18 +141,18 @@ def find_empty_row(sheets, table):
         return None
 
 
-async def add_row(rows):
+async def add_row(rows, table):
     try:
         service = getCreds()
         sheets = service.spreadsheets()
-        free = find_empty_row(sheets=sheets, table="📒 Buyurtmalar")
+        free = find_empty_row(sheets=sheets, table=table)
         for row in rows:
             if row[1] == None:
                 row[1] = free
             print(f"id{row[0]}{row[1]}")
             sheets.values().update(
                 spreadsheetId=SPREADSHEET_ID,
-                range=f"'📒 Buyurtmalar'!{row[0]}{row[1]}",
+                range=f"'{table}'!{row[0]}{row[1]}",
                 valueInputOption="RAW",
                 body={"values": [[row[2]]]}
             ).execute()

@@ -1,4 +1,5 @@
-from aiogram.types import KeyboardButton, ReplyKeyboardMarkup, ReplyKeyboardRemove
+from aiogram.types import KeyboardButton, ReplyKeyboardMarkup, ReplyKeyboardRemove, InlineKeyboardButton, \
+    InlineKeyboardMarkup
 
 from sheet import getData
 
@@ -9,7 +10,11 @@ menuBtn = ReplyKeyboardMarkup(
             KeyboardButton(text='💲 Daromadim')
         ],
         [
-            KeyboardButton(text="➕ Yangi buyurtma")
+            KeyboardButton(text="➕ Yangi buyurtma"),
+            KeyboardButton(text="🛒 Buyurtmalar")
+        ],
+        [
+            KeyboardButton(text="🤝 Hamkorlar bo’limi")
         ]
     ],
     resize_keyboard=True
@@ -24,6 +29,17 @@ async def markets(data):
             keyboard.insert(button)
     return keyboard
 
+async def cancel(data, id):
+    keyboard = InlineKeyboardMarkup(row_width=1)
+    for item in data:
+        if len(item) > 117 and item[117]:
+            button_text = item[117]
+            button = InlineKeyboardButton(text=button_text, callback_data=f"cancelReason_{button_text}_{id}")
+            keyboard.insert(button)
+    button = InlineKeyboardButton(text="◀️ Orqaga", callback_data=f"cancelCancel_{id}")
+    keyboard.insert(button)
+    return keyboard
+
 def confirmBtn():
     keyboard = ReplyKeyboardMarkup(keyboard=[
         [
@@ -33,6 +49,19 @@ def confirmBtn():
             KeyboardButton(text="Bekor qilish❌", callback_data=f"false")
         ]
     ], row_width=2, resize_keyboard=True)
+    return keyboard
+
+def confirmBtn0(id):
+    keyboard = InlineKeyboardMarkup(
+        inline_keyboard=[
+            [
+                InlineKeyboardButton(text="Tasdiqlash✅", callback_data=f"truePartner_{id}"),
+                InlineKeyboardButton(text="Bekor qilish❌", callback_data=f"falsePartner_{id}")
+
+            ],
+        ],
+        row_width=2
+    )
     return keyboard
 
 def confirmBtn2():
@@ -61,3 +90,21 @@ def CancelBtn():
         ]
     ], row_width=2, resize_keyboard=True)
     return keyboard
+
+partnerMenu = ReplyKeyboardMarkup(
+    [
+        [
+            KeyboardButton(text='📋 Barchasi'),
+            KeyboardButton(text="🆕 Yangi do'kon!")
+        ],
+        [
+            KeyboardButton(text="🟡 Qabul qilindi!"),
+            KeyboardButton(text="📔 O'quv jarayonida!")
+        ],
+        [
+            KeyboardButton(text="✅ Hamkorlikda!"),
+            KeyboardButton(text="❌ Bloklandi!")
+        ]
+    ],
+    resize_keyboard=True
+)

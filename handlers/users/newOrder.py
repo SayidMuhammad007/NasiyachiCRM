@@ -238,7 +238,7 @@ async def bot_start(callback: types.CallbackQuery, state:FSMContext):
                                  user_id=callback.from_user.id)
         if test[0][0][1] == "🔵 yangi buyurtma":
             add = await add_row(rows=[["D", int(test[0][0][0]) + 2, callback.from_user.id],
-                                      ["B", int(test[0][0][0]) + 2, '🟠 konsultatsiya']])
+                                      ["B", int(test[0][0][0]) + 2, '🟠 konsultatsiya']],table="📒 Buyurtmalar")
             text = await getNotifMsg(add, callback.from_user.id, callback.from_user.username)
             await bot.send_message(chat_id=ADMIN_ID, text=text)
         check = test[0][0]
@@ -256,6 +256,7 @@ Mahsulot nomi: <b>{check[22]}</b>
 Mahsulot narxi: <b>{check[28]}</b> 
 Nasiya narx: <b>{check[34]}</b> 
 Oylik to'lov: <b>{check[35]}</b> 
+Bo’lib to’lash muddati:: <b>{check[23]}</b> 
 Bo’lib to’lash muddati:: <b>{check[23]}</b> 
 Buyurtma holati: <b>{check[1]}</b> 
 Sana va vaqt: <b>{check[4]}</b>,<b>{check[77]}</b> 

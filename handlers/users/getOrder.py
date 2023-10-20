@@ -10,15 +10,13 @@ from loader import dp, bot
 async def handle_product_deletion(callback_query: types.CallbackQuery):
     selected_order_id = callback_query.data.split('_')[1]
     await callback_query.message.delete()
-    # loading_message = await message.answer_animation(
-    #     animation='https://t.me/myprojectphotobase90775803200000/67')
     loading_message = await bot.send_animation(chat_id=callback_query.from_user.id,
                                                animation="https://t.me/myprojectphotobase90775803200000/67",
                                                disable_notification=True)
 
     test = await find_orders(value_to_find=selected_order_id, cur=0, table='📒 Buyurtmalar', user_id=callback_query.from_user.id)
     if test[0][0][1] == "🔵 yangi buyurtma":
-        add = await add_row(rows=[["D", int(test[0][0][0]) + 2, callback_query.from_user.id], ["B", int(test[0][0][0]) + 2, '🟠 konsultatsiya']])
+        add = await add_row(rows=[["D", int(test[0][0][0]) + 2, callback_query.from_user.id], ["B", int(test[0][0][0]) + 2, '🟠 konsultatsiya']],table="📒 Buyurtmalar")
         text = await getNotifMsg(add, callback_query.from_user.id, callback_query.from_user.username)
         await bot.send_message(chat_id=ADMIN_ID, text=text)
     if test[0][0][1] == "🟠 konsultatsiya" or test[0][0][1] == "🔵 yangi buyurtma":

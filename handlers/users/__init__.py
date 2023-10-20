@@ -8,4 +8,5 @@ from . import cancel
 from . import notsell
 from . import finish
 from . import newOrder
+from . import partners
 from . import echo

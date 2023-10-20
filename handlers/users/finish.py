@@ -192,7 +192,7 @@ async def id(message: types.Message, state:FSMContext):
             ["B", int(orderId) + 2, "⚪️ rasmiylashtirildi"],
             ["CD", int(orderId) + 2, screen],
         ]
-        await add_row(rows=data)
+        await add_row(rows=data,table="📒 Buyurtmalar")
         notify = await getNotifMsg(int(orderId)+2, message.from_user.id, message.from_user.username)
         await bot.send_message(chat_id=ADMIN_ID, text=notify)
         await message.answer(text="Tasdiqlandi", reply_markup=menuBtn)
