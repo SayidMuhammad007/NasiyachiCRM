@@ -60,6 +60,7 @@ async def getData1(value_to_find, cur, table):
         print(f"Error finding row: {error}")
         return None
 
+
 async def getData2(value_to_find, cur, table):
     try:
         service = getCreds()
