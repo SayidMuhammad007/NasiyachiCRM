@@ -5,3 +5,4 @@ from . import getPartner
 from . import Back
 from . import CancelReason
 from . import confirmation
+from . import main

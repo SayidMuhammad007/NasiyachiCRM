@@ -18,7 +18,7 @@ async def on_startup(dispatcher):
     await on_startup_notify(dispatcher)
 
 async def on_shutdown_notify(dispatcher):
-    await send_stop_notification(dispatcher)
+    # await send_stop_notification(dispatcher)
     await dp.storage.close()
     await dp.storage.wait_closed()
     await dp.bot.session.close()
