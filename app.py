@@ -27,8 +27,8 @@ async def main():
     # Schedule the monitor_database function to run every 5 minutes
     while True:
         logging.exception("Enter timer...")
-        await monitor_database()
-        await asyncio.sleep(10)
+        # await monitor_database()
+        await asyncio.sleep(10000)
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.ERROR)  # Set the desired logging level
