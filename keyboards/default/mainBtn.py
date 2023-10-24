@@ -104,6 +104,9 @@ partnerMenu = ReplyKeyboardMarkup(
         [
             KeyboardButton(text="✅ Hamkorlikda!"),
             KeyboardButton(text="❌ Bloklandi!")
+        ],
+        [
+            KeyboardButton(text="⬅️ Orqaga")
         ]
     ],
     resize_keyboard=True
