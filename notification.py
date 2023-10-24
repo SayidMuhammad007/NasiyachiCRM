@@ -15,7 +15,7 @@ async def send_notification(user_id, message_text):
 # Monitor the database for new entries
 async def monitor_database():
     try:
-        data = await getData1(value_to_find=100, cur=52, table="🏢 Hamkor-do'konlar")
+        data = await getData1(value_to_find=5, cur=52, table="🏢 Hamkor-do'konlar")
         print(data)
         logging.exception("Sending...")
         if data:
