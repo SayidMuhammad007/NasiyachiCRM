@@ -19,7 +19,7 @@ async def handle_product_deletion(callback_query: types.CallbackQuery):
     if len(partner[0]) > 46 and partner[0][46]:
         selected = partner[0][0]
     else:
-        add = await add_row(rows=[["AU", int(selected) + 3, "🟡 Qabul qilindi!"],["BB", int(selected) + 3, callback_query.from_user.username], ["AH", int(selected) + 3, worker[0][19]]],table="🏢 Hamkor-do'konlar")
+        add = await add_row(rows=[["AU", int(selected) + 3, "🟡 Qabul qilindi!"],["BB", int(selected) + 3, callback_query.from_user.username], ["AH", int(selected) + 3, worker[0][19]], ["BA", int(selected) + 3, 1]],table="🏢 Hamkor-do'konlar")
         partner = await getData1(value_to_find=selected, cur=0, table="🏢 Hamkor-do'konlar")
     msg = f"""
 <b>👤 Rahbar ma’lumotlari:</b>
