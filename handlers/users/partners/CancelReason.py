@@ -13,6 +13,6 @@ async def handle_product_deletion(callback_query: types.CallbackQuery):
     loading_message = await bot.send_animation(chat_id=callback_query.from_user.id,
                                                animation="https://t.me/myprojectphotobase90775803200000/67",
                                                disable_notification=True)
-    add = await add_row(rows=[["AU", int(selected) + 3, "❌ Bekor qilish"], ["AU", int(selected) + 3, reason], ["BA", int(selected) + 3, 2]], table="🏢 Hamkor-do'konlar")
+    add = await add_row(rows=[["AU", int(selected) + 3, "❌ Bekor qilish"], ["BC", int(selected) + 3, reason], ["BA", int(selected) + 3, 2]], table="🏢 Hamkor-do'konlar")
     await callback_query.message.answer(text="❌ Bekor qilindi")
     await loading_message.delete()
