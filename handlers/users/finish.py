@@ -29,74 +29,6 @@ async def handle_product_deletion(callback_query: types.CallbackQuery, state:FSM
         )
     await Save.screen.set()
 
-# @dp.message_handler(state=Save.id)
-# async def id(message: types.Message, state:FSMContext):
-#     await state.update_data({'id':message.text})
-#     await message.answer(text="Bo`lib to`lash muddati", reply_markup=Month())
-#     await Save.time.set()
-#
-# @dp.callback_query_handler(state=Save.time)
-# async def id(callback: types.CallbackQuery, state:FSMContext):
-#     await state.update_data({'time':callback.data})
-#     await callback.message.edit_text(text="Mahsulot nomi")
-#     await Save.product.set()
-#
-# @dp.message_handler(state=Save.product)
-# async def id(message: types.Message, state:FSMContext):
-#     await state.update_data({'product':message.text})
-#     await message.answer(text="Mahsulot narxi")
-#     await Save.price.set()
-#
-#
-# @dp.message_handler(state=Save.price)
-# async def id(message: types.Message, state:FSMContext):
-#     try:
-#         price = float(message.text)
-#         await state.update_data({'price':message.text})
-#         await message.answer(text="Mahsulot rasmi")
-#         await Save.image.set()
-#     except:
-#         await message.answer(text="Faqat son kiriting!")
-#         await Save.price.set()
-#
-#
-#
-# @dp.message_handler(state=Save.image, content_types=types.ContentType.PHOTO)
-# async def id(message: types.Message, state:FSMContext):
-#     sent_message = await message.copy_to(chat_id="@"+CHANNEL_ID)
-#     post_link = f"https://t.me/{CHANNEL_ID}/{sent_message.message_id}"
-#     print(post_link)
-#     await state.update_data({'image':post_link})
-#     data = await getAll(table="🏢 Hamkor-do'konlar")
-#     btn = await markets(data)
-#     await message.answer(text="Hamkor do`konni tanlang!", reply_markup=btn)
-#     await Save.market.set()
-#
-# @dp.message_handler(state=Save.image, content_types=types.ContentType.ANY)
-# async def id(message: types.Message, state:FSMContext):
-#     await message.answer(text="Rasm yuboring!")
-#     await Save.image.set()
-#
-# @dp.message_handler(state=Save.market)
-# async def id(message: types.Message, state:FSMContext):
-#     await state.update_data({'market':message.text})
-#     await message.answer(text="Mijozning mahsulot bilan rasmi!", reply_markup=ReplyKeyboardRemove())
-#     await Save.customer_pic.set()
-#
-# @dp.message_handler(state=Save.customer_pic, content_types=types.ContentType.PHOTO)
-# async def id(message: types.Message, state:FSMContext):
-#     sent_message = await message.copy_to(chat_id="@"+CHANNEL_ID)
-#     post_link = f"https://t.me/{CHANNEL_ID}/{sent_message.message_id}"
-#     print(post_link)
-#     await state.update_data({'customer_pic':post_link})
-#     await message.answer(text="Shartnoma faolligi scrinshoti", reply_markup=ReplyKeyboardRemove())
-#     await Save.screen.set()
-
-# @dp.message_handler(state=Save.customer_pic, content_types=types.ContentType.ANY)
-# async def id(message: types.Message, state:FSMContext):
-#     await message.answer(text="Rasm yuboring!")
-#     await Save.customer_pic.set()
-
 
 @dp.message_handler(state=Save.screen, content_types=types.ContentType.PHOTO)
 async def id(message: types.Message, state:FSMContext):
@@ -106,24 +38,6 @@ async def id(message: types.Message, state:FSMContext):
     await state.update_data({'screen':post_link})
     data = await state.get_data()
     orderId = data.get('orderId')
-    # time = data.get('time')
-    # product = data.get('product')
-    # price = data.get('price')
-    # image = data.get('image')
-    # market = data.get('market')
-    # customer_pic = data.get('customer_pic')
-    # screen = data.get('screen')
-#     msg = f"""
-# Ma`lumotlarni tekshiring
-# Mijoz pasport IDsi: {id}
-# Bo`lib to`lash muddati: {time}
-# Mahsulot nomi: {product}
-# Narxi: {price}
-# Hamkor do`kon: {market}
-# Mahsulot rasmi: {image}
-# Mijozni mahsulot bilan rasmi: {customer_pic}
-# Shartnoma faolligi skrinshoti: {screen}
-#     """
     data0 = await getData2(orderId, 0, "📒 Buyurtmalar")
     a_data = data0[0]
     msg = f"""

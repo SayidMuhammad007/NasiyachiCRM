@@ -122,18 +122,6 @@ async def bot_start(message: types.Message, state:FSMContext):
     time = data.get('time')
     print(data)
     if time == "6 oy":
-#         msg = f"""
-# Yuqoridagi ma’lumotlarni tasdiqlang
-# Mijoz ismi: {name}
-# Telefon raqami: {phone}
-# Mahsulot nomi: {product}
-# Mahsulot narxi: {price}
-# Nasiya narxi: {data[9]}
-# Oylik to`lov: {data[12]}
-# UzumNasiyadan ro’yhatdan o’tganmi?: {uzum}
-# Bo’lib to’lash muddati (6 oy/12 oy): {time}
-# UzumNasiyadan ro’yhatdan o’tgan telefon raqamlari: {uzum_phone}
-#                     """
         msg = f"""
 👤 Mijoz:
 Ism: {name}
@@ -143,26 +131,13 @@ UzumNasiyadan ro'yhatdan o'tgan telefon raqami: {uzum_phone}
 🛒 Buyurtma:
 Mahsulot nomi: {product}
 Mahsulot narxi: {price}
-Bo’lib to’lash muddati (6 oy/12 oy): {time}
+Bo’lib to’lash muddati: {time}
 Buyurtma holati: 🔵 yangi buyurtma
 
 🏢 Do'kon:
 Nomlanishi:{market}
                 """
-
-    else:
-#         msg = f"""
-# Yuqoridagi ma’lumotlarni tasdiqlang
-# Mijoz ismi: {name}
-# Telefon raqami: {phone}
-# Mahsulot nomi: {product}
-# Mahsulot narxi: {price}
-# Nasiya narxi: {data[9]}
-# Oylik to`lov: {data[18]}
-# UzumNasiyadan ro’yhatdan o’tganmi?: {uzum}
-# Bo’lib to’lash muddati (6 oy/12 oy): {time}
-# UzumNasiyadan ro’yhatdan o’tgan telefon raqamlari: {uzum_phone}
-#                             """
+    elif time == "3 oy":
         msg = f"""
 👤 Mijoz:
 Ism: {name}
@@ -172,7 +147,24 @@ UzumNasiyadan ro'yhatdan o'tgan telefon raqami: {uzum_phone}
 🛒 Buyurtma:
 Mahsulot nomi: {product}
 Mahsulot narxi: {price}
-Bo’lib to’lash muddati (6 oy/12 oy): {time}
+Bo’lib to’lash muddati: {time}
+Buyurtma holati: 🔵 yangi buyurtma
+
+🏢 Do'kon:
+Nomlanishi:{market}
+                    """
+
+    else:
+        msg = f"""
+👤 Mijoz:
+Ism: {name}
+Telefon raqam: {phone}
+UzumNasiyadan ro'yhatdan o'tgan telefon raqami: {uzum_phone} 
+
+🛒 Buyurtma:
+Mahsulot nomi: {product}
+Mahsulot narxi: {price}
+Bo’lib to’lash muddati: {time}
 Buyurtma holati: 🔵 yangi buyurtma
 
 🏢 Do'kon:

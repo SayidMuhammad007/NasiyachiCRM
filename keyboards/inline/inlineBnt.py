@@ -110,7 +110,10 @@ def RequestBtn():
 def Month():
     btn = InlineKeyboardMarkup(row_width=2, inline_keyboard=[
         [
+            InlineKeyboardButton(text="3 oy", callback_data="3 oy"),
             InlineKeyboardButton(text="6 oy", callback_data="6 oy"),
+        ],
+        [
             InlineKeyboardButton(text="12 oy", callback_data="12 oy"),
         ]
     ])

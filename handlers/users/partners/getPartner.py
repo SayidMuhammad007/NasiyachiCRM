@@ -8,6 +8,7 @@ from sheet import *
 @dp.callback_query_handler(lambda callback_query: callback_query.data.startswith('PartnerId_'))
 async def handle_product_deletion(callback_query: types.CallbackQuery):
     selected = callback_query.data.split('_')[1]
+    print("selected", callback_query.data)
     await callback_query.message.delete()
     loading_message = await bot.send_animation(chat_id=callback_query.from_user.id,
                                                animation="https://t.me/myprojectphotobase90775803200000/67",
