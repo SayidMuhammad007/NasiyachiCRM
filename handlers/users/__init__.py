@@ -9,4 +9,6 @@ from . import notsell
 from . import finish
 from . import newOrder
 from . import partners
+from . import finance
+from . import hr
 from . import echo

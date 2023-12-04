@@ -2,6 +2,62 @@ from aiogram.types import  InlineKeyboardButton, InlineKeyboardMarkup
 
 from sheet import *
 
+async def Moliya(data):
+    keyboard = []
+    row = []  # Initialize an empty row
+    for i in data:
+        if len(i) >= 14:
+            button = InlineKeyboardButton(text=i[14], callback_data=i[14])
+            row.append(button)
+
+        # Check if the row has reached the desired width (2 in this case)
+        if len(row) == 2:
+            keyboard.append(row)  # Add the row to the keyboard
+            row = []  # Reset the row
+
+    # If there are any remaining buttons in the row, add them
+    if row:
+        keyboard.append(row)
+
+    return InlineKeyboardMarkup(inline_keyboard=keyboard)
+
+async def Penalty(data):
+    keyboard = []
+
+    for i in data:
+        if len(i) > 129 and i[129]:
+            button = InlineKeyboardButton(text=i[129], callback_data=i[129])
+            keyboard.append([button])  # Append a new row with a single button
+
+    return InlineKeyboardMarkup(inline_keyboard=keyboard)
+
+
+
+def Payment():
+    btn = InlineKeyboardMarkup(row_width=2, inline_keyboard=[
+        [
+            InlineKeyboardButton(text="✅ To’lov qilindi", callback_data="moliya_0"),
+            InlineKeyboardButton(text="⬅️ Ortga", callback_data="moliya_1"),
+        ]
+    ])
+    return btn
+
+def HR():
+    btn = InlineKeyboardMarkup(row_width=2, inline_keyboard=[
+        [
+            InlineKeyboardButton(text="🔴 Jarimalar", callback_data="jarima"),
+            InlineKeyboardButton(text="🏃 Ishga kelish", callback_data="kelish"),
+        ]
+    ])
+    return btn
+
+def Skip():
+    btn = InlineKeyboardMarkup(row_width=2, inline_keyboard=[
+        [
+            InlineKeyboardButton(text="⏩ O’tkazib yuborish!", callback_data="skip"),
+        ]
+    ])
+    return btn
 
 def menejer():
     keyboard = InlineKeyboardMarkup(inline_keyboard=[
@@ -129,3 +185,11 @@ def Success():
     ])
     return btn
 
+def Confirm():
+    btn = InlineKeyboardMarkup(row_width=2, inline_keyboard=[
+        [
+            InlineKeyboardButton(text="✅ Tasdiqlash", callback_data="success"),
+            InlineKeyboardButton(text="❌ Bekor qilindi", callback_data="failure"),
+        ]
+    ])
+    return btn

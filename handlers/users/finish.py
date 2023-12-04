@@ -3,7 +3,7 @@ from aiogram.dispatcher import FSMContext
 import string
 import random
 from aiogram.types import ReplyKeyboardRemove
-
+from handlers.users.start import checkUser as check
 from keyboards.default import mainBtn
 from keyboards.default.mainBtn import markets, confirmBtn, menuBtn, times
 from keyboards.inline.inlineBnt import *
@@ -109,8 +109,8 @@ async def id(message: types.Message, state:FSMContext):
         await add_row(rows=data,table="📒 Buyurtmalar")
         notify = await getNotifMsg(int(orderId)+2, message.from_user.id, message.from_user.username)
         await bot.send_message(chat_id=ADMIN_ID, text=notify)
-        await message.answer(text="Tasdiqlandi", reply_markup=menuBtn)
-        await state.finish()
+        await message.answer(text="Tasdiqlandi")
     else:
-        await message.answer(text="❌Bekor qilindi", reply_markup=menuBtn)
-        await state.finish()
+        await message.answer(text="❌Bekor qilindi")
+    await check(message)
+    await state.finish()

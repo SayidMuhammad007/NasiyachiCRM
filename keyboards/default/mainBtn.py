@@ -14,7 +14,43 @@ menuBtn = ReplyKeyboardMarkup(
             KeyboardButton(text="🛒 Buyurtmalar")
         ],
         [
-            KeyboardButton(text="🤝 Hamkorlar bo’limi")
+            KeyboardButton(text="🤝 Hamkorlar bo’limi"),
+            KeyboardButton(text="💰 Moliya bo’limi")
+        ]
+    ],
+    resize_keyboard=True
+)
+
+adminBtn = ReplyKeyboardMarkup(
+    [
+        [
+            KeyboardButton(text='📋 Buyurtmalar'),
+            KeyboardButton(text='💲 Daromadim')
+        ],
+        [
+            KeyboardButton(text="➕ Yangi buyurtma"),
+            KeyboardButton(text="🛒 Buyurtmalar")
+        ],
+        [
+            KeyboardButton(text="🤝 Hamkorlar bo’limi"),
+            KeyboardButton(text="💰 Moliya bo’limi")
+        ],
+        [
+            KeyboardButton(text="🚻 HR bo’limi")
+        ]
+    ],
+    resize_keyboard=True
+)
+
+
+
+PayBtn = ReplyKeyboardMarkup(
+    [
+        [
+            KeyboardButton(text='📄 To’lovlar'),
+        ],
+        [
+            KeyboardButton(text="⬅️ Orqaga")
         ]
     ],
     resize_keyboard=True
@@ -39,6 +75,30 @@ async def cancel(data, id):
     button = InlineKeyboardButton(text="◀️ Orqaga", callback_data=f"cancelCancel_{id}")
     keyboard.insert(button)
     return keyboard
+
+
+async def payments(data):
+    keyboard = InlineKeyboardMarkup(row_width=1)
+
+    for item in data:
+        button_text = ""
+
+        if len(item) > 84:
+            if item[84]:
+                button_text = item[84]
+            elif item[85]:
+                button_text = item[85]
+
+            if button_text:
+                # Ensure that callback_data adheres to Telegram API specifications
+                callback_data = f"select_{button_text}"  # Trim to a reasonable length
+
+                button = InlineKeyboardButton(text=button_text, callback_data=callback_data)
+                keyboard.insert(button)
+
+    return keyboard
+
+
 
 def confirmBtn():
     keyboard = ReplyKeyboardMarkup(keyboard=[

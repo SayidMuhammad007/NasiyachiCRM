@@ -4,6 +4,7 @@ from aiogram import types
 from aiogram.dispatcher import FSMContext
 from aiogram.types import ReplyKeyboardRemove
 
+from handlers.users.start import checkUser as check
 from keyboards.default.mainBtn import menuBtn, CancelBtn, markets
 from keyboards.inline.inlineBnt import RequestBtn, Month, Success, btn2, btn1
 from loader import dp, bot
@@ -16,7 +17,7 @@ phone_pattern = r'^\d{9}$|^\d{2}\s?\d{3}\s?\d{2}\s?\d{2}$'
 @dp.message_handler(lambda message: message.text in ["/start", "❌ Bekor qilish"], state="*")
 async def start_command(message: types.Message, state: FSMContext):
     await state.finish()
-    await message.answer(text="Tanlang!", reply_markup=menuBtn)
+    await check(message)
 
 
 @dp.message_handler(text='➕ Yangi buyurtma')

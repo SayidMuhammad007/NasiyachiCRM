@@ -1,8 +1,9 @@
 from aiogram import types
 from aiogram.dispatcher.filters.builtin import CommandStart
 
-from keyboards.default.mainBtn import menuBtn
+from keyboards.default.mainBtn import menuBtn, adminBtn
 from keyboards.inline.inlineBnt import menejer
+from secret import connect
 from sheet import *
 from loader import dp
 
@@ -14,7 +15,9 @@ async def bot_start(message: types.Message):
 async def checkUser(message):
     check = await getData1(value_to_find=message.from_user.id, cur=4, table='👥 Xodimlar')
     print(check)
-    if check:
+    if check and check[0][7] in connect:
+        await message.answer(f"Assalomu alaykum, {message.from_user.full_name}!", reply_markup=adminBtn)
+    elif check:
         await message.answer(f"Assalomu alaykum, {message.from_user.full_name}!", reply_markup=menuBtn)
     else:
         text = """

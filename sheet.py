@@ -48,7 +48,7 @@ async def getData1(value_to_find, cur, table):
     try:
         service = getCreds()  # Assuming getCreds() is defined correctly
         sheets = service.spreadsheets()
-        result = sheets.values().get(spreadsheetId=SPREADSHEET_ID, range=f'{table}!A:CC').execute()
+        result = sheets.values().get(spreadsheetId=SPREADSHEET_ID, range=f'{table}!A:FF').execute()
         values = result.get('values', [])
         data = []
         for row in values:
@@ -77,15 +77,67 @@ async def getData2(value_to_find, cur, table):
         print(f"Error finding row: {error}")
         return None
 
+async def checkUser(value_to_find, table, row_id):
+    try:
+        service = getCreds()
+        sheets = service.spreadsheets()
+        if sheets:
+            result = sheets.values().get(spreadsheetId=SPREADSHEET_ID, range=f"{table}!A:BC").execute()
+            values = result.get('values', [])
+            for row in values:
+                try:
+                    if row and str(row[row_id]) == str(value_to_find):
+                        return row  # Row numbers start at 1, return the row data as well
+                    elif ',' in row[row_id]:
+                        if str(value_to_find) in row[row_id]:
+                            return row  # Row numbers start at 1, return the row data as well
+
+                except (ValueError, IndexError):
+                    print(ValueError)  # Row numbers start at 1, return the row data as well
+        return None
+    except HttpError as error:
+        print(f"Error finding row: {error}")
+        return None
+
+async def getDataForDropdown(table):
+    service = getCreds()
+    sheets = service.spreadsheets()
+    try:
+        result = sheets.values().get(spreadsheetId=SPREADSHEET_ID, range=f'{table}').execute()
+        values = result.get('values', [])
+        data = []
+        for row in values:
+            if row:
+                data.append(row)
+        return data
+    except HttpError as error:
+        print(f"Error finding row: {error}")
+        return None
+
+async def getAllHaveValueOne(table, col, cur, value_to_find):
+    service = getCreds()
+    sheets = service.spreadsheets()
+    try:
+        result = sheets.values().get(spreadsheetId=SPREADSHEET_ID, range=f'{table}!{col}').execute()
+        values = result.get('values', [])
+        data = []
+        for row in values:
+            if len(row) > cur and str(row[cur]) == str(value_to_find):
+                data.append(row)
+        return data
+    except HttpError as error:
+        print(f"Error finding row: {error}")
+        return None
+
 
 async def getAll(table):
     try:
         service = getCreds()
         sheets = service.spreadsheets()
-        result = sheets.values().get(spreadsheetId=SPREADSHEET_ID, range=f'{table}!A3:DN').execute()
+        result = sheets.values().get(spreadsheetId=SPREADSHEET_ID, range=f'{table}!A3:FF').execute()
         values = result.get('values', [])
         data = []
-        for row in reversed(values):
+        for row in values:
             if row:
                 data.append(row)
         return data
@@ -161,6 +213,7 @@ async def add_row(rows, table):
     except HttpError as error:
         print(f"Error adding row: {error}")
 
+
 async def getNotifMsg(id, tg_id, username):
     data1 = await getData(int(id)-2, 0, "📒 Buyurtmalar")
     seller1 = await getData1(tg_id, 4, "👥 Xodimlar")
@@ -227,6 +280,28 @@ Telegram: @{username}
     #     await bot.send_message(chat_id=partner[0][5], text=msg)
     return admin
 
+async def addDData(column, values, table):
+    try:
+        service = getCreds()
+        sheets = service.spreadsheets()
+        next_empty_row = find_empty_row(sheets, table)
+        print(column)
+        if next_empty_row:
+            for value in values:
+                range_ = f"{table}!{value[1]}{next_empty_row}"
+                data = [[value[0]]]  # Wrap the value in a list for proper formatting
+                print(data)
+                sheets.values().update(
+                    spreadsheetId=SPREADSHEET_ID,
+                    range=range_,
+                    valueInputOption="RAW",
+                    body={"values": data}
+                ).execute()
+            return True
+        else:
+            print('error: No empty rows found')
+    except HttpError as error:
+        print(f"Error adding row: {error}")
 
 async def addData(values, table):
     try:
