@@ -3,7 +3,7 @@ import datetime
 from aiogram import types
 from aiogram.dispatcher import FSMContext
 
-from keyboards.default.mainBtn import menuBtn
+from keyboards.default.mainBtn import menuBtn, PayBtn
 from keyboards.inline.inlineBnt import Moliya
 from loader import dp
 from secret import CHANNEL_ID, ADMIN_ID
@@ -52,5 +52,5 @@ async def get_partner_phone(callback: types.CallbackQuery, state: FSMContext):
     print("id",id,"img", img)
     await addDData("d", [[partner, "B"], [img, "G"], [id, "F"], [price_float, "E"], [date, 'H'], [time, 'I']], "💸 To'lovlar")
     await loading_message.delete()
-    await callback.message.answer(f"✅ Qabul qilindi, rahmat!", reply_markup=menuBtn)
+    await callback.message.answer(f"✅ Qabul qilindi, rahmat!", reply_markup=PayBtn)
     await state.finish()
