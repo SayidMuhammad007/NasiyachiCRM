@@ -61,5 +61,4 @@ async def get_partner_phone(callback: types.CallbackQuery, state: FSMContext):
     end_idx = (current_page + 1) * ITEMS_PER_PAGE
 
     text, markup = generate_message_text(start_idx, end_idx)
-
     await callback.message.answer(text=text, reply_markup=markup)
