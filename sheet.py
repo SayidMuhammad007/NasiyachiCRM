@@ -111,6 +111,22 @@ async def getData2(value_to_find, cur, table):
         print(f"Error finding row: {error}")
         return None
 
+async def getDataNew(value_to_find, cur, table):
+    try:
+        service = getCreds()  # Assuming getCreds() is defined correctly
+        sheets = service.spreadsheets()
+        result = sheets.values().get(spreadsheetId=SPREADSHEET_ID, range=f'{table}!A:FF').execute()
+        values = result.get('values', [])
+        data = []
+        for row in values:
+            if len(row) > cur and str(row[cur]) == str(value_to_find) and row[46] == "🆕 Yangi do'kon!":
+                data.append(row)
+        print(data)
+        return data
+    except HttpError as error:
+        print(f"Error finding row: {error}")
+        return None
+
 async def checkUser(value_to_find, table, row_id):
     try:
         service = getCreds()
