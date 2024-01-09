@@ -188,9 +188,7 @@ async def bot_start(callback: types.CallbackQuery, state:FSMContext):
     loading_message = await callback.message.answer_animation(
         animation='https://t.me/myprojectphotobase90775803200000/67')
     if callback.data == "confirmYes":
-        data5 = await getData1(value_to_find=callback.from_user.id, cur=4, table="👥 Xodimlar")
-        data2 = data5[0]
-        print(data2)
+
         data = await state.get_data()
         name = data.get('name')
         product = data.get('product')
@@ -223,20 +221,22 @@ async def bot_start(callback: types.CallbackQuery, state:FSMContext):
         selected_order_id = await addData(data, "📒 Buyurtmalar")
 
         msg = await callback.message.answer(text="Tasdiqlandi!", reply_markup=menuBtn)
+        seller1 = await getData1(callback.from_user.id, 4, "👥 Xodimlar")
         await loading_message.delete()
-        await msg.delete()
-        loading_message = await callback.message.answer_animation(
-            animation='https://t.me/myprojectphotobase90775803200000/67')
-        test = await find_orders(value_to_find=selected_order_id, cur=0, table='📒 Buyurtmalar',
-                                 user_id=callback.from_user.id)
-        if test[0][0][1] == "🔵 yangi buyurtma":
-            add = await add_row(rows=[["D", int(test[0][0][0]) + 2, callback.from_user.id],
-                                      ["B", int(test[0][0][0]) + 2, '🟠 konsultatsiya']],table="📒 Buyurtmalar")
-            text = await getNotifMsg(add, callback.from_user.id, callback.from_user.username)
-            await bot.send_message(chat_id=ADMIN_ID, text=text)
-        check = test[0][0]
-        print(check)
-        msg = f"""
+        if len(seller1) > 1:
+            await msg.delete()
+            loading_message = await callback.message.answer_animation(
+                animation='https://t.me/myprojectphotobase90775803200000/67')
+            test = await find_orders(value_to_find=selected_order_id, cur=0, table='📒 Buyurtmalar',
+                                     user_id=callback.from_user.id)
+            if test[0][0][1] == "🔵 yangi buyurtma":
+                add = await add_row(rows=[["D", int(test[0][0][0]) + 2, callback.from_user.id],
+                                          ["B", int(test[0][0][0]) + 2, '🟠 konsultatsiya']],table="📒 Buyurtmalar")
+                text = await getNotifMsg(add, callback.from_user.id, callback.from_user.username)
+                await bot.send_message(chat_id=ADMIN_ID, text=text)
+            check = test[0][0]
+            print(check)
+            msg = f"""
 Buyurtma tafsilotlari:
 
 👤 Mijoz:
@@ -261,14 +261,14 @@ Shartnoma skrinshoti: {'<b>' + check[81] + '</b>' if len(check) > 81 else ''}
 🏢 Do'kon:
 Nomlanishi:<b>{check[21]}</b>
 Call-center: <b>{check[20]}</b>
-            """
-        await bot.send_message(
-            chat_id=callback.message.chat.id,
-            text=msg,
-            reply_markup=btn1(selected_order_id[1])
-        )
+                """
+            await bot.send_message(
+                chat_id=callback.message.chat.id,
+                text=msg,
+                reply_markup=btn1(selected_order_id[1])
+            )
 
-        await loading_message.delete()
+            await loading_message.delete()
 
     else:
         await callback.message.answer(text="Bekor qilindi!", reply_markup=menuBtn)

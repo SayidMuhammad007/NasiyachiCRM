@@ -36,7 +36,8 @@ adminBtn = ReplyKeyboardMarkup(
             KeyboardButton(text="💰 Moliya bo’limi")
         ],
         [
-            KeyboardButton(text="🚻 HR bo’limi")
+            KeyboardButton(text="🚻 HR bo’limi"),
+            KeyboardButton(text="➕ Yangi hamkor")
         ]
     ],
     resize_keyboard=True
@@ -68,8 +69,8 @@ async def markets(data):
 async def cancel(data, id):
     keyboard = InlineKeyboardMarkup(row_width=1)
     for item in data:
-        if len(item) > 117 and item[117]:
-            button_text = item[117]
+        if len(item) > 115 and item[115]:
+            button_text = item[115]
             button = InlineKeyboardButton(text=button_text, callback_data=f"cancelReason_{button_text}_{id}")
             keyboard.insert(button)
     button = InlineKeyboardButton(text="◀️ Orqaga", callback_data=f"cancelCancel_{id}")

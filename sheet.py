@@ -60,6 +60,40 @@ async def getData1(value_to_find, cur, table):
         print(f"Error finding row: {error}")
         return None
 
+async def getDataNew(value_to_find, cur, table):
+    try:
+        service = getCreds()  # Assuming getCreds() is defined correctly
+        sheets = service.spreadsheets()
+        result = sheets.values().get(spreadsheetId=SPREADSHEET_ID, range=f'{table}!A:FF').execute()
+        values = result.get('values', [])
+        data = []
+        for row in values:
+            if len(row) > cur and str(row[cur]) == str(value_to_find) and row[46] == "🆕 Yangi do'kon!":
+                data.append(row)
+        print(data)
+        return data
+    except HttpError as error:
+        print(f"Error finding row: {error}")
+        return None
+
+async def getData01(value_to_find, cur, table):
+    try:
+        service = getCreds()  # Assuming getCreds() is defined correctly
+        sheets = service.spreadsheets()
+        result = sheets.values().get(spreadsheetId=SPREADSHEET_ID, range=f'{table}!A:FF').execute()
+        values = result.get('values', [])
+        data = []
+        for row in values:
+            if len(row) > cur and str(row[cur]) == str(value_to_find):
+                data.append(row)
+        print(data)
+        return data
+    except HttpError as error:
+        print(f"Error finding row: {error}")
+        return None
+
+
+
 
 async def getData2(value_to_find, cur, table):
     try:
@@ -172,6 +206,22 @@ async def find_orders(value_to_find, cur, table, user_id):
                 data.append(check)
         print(data)
         return data, status
+    except HttpError as error:
+        print(f"Error finding row: {error}")
+        return None
+
+
+async def checkStatus():
+    try:
+        service = getCreds()
+        sheets = service.spreadsheets()
+        result = sheets.values().get(spreadsheetId=SPREADSHEET_ID, range=f'📒 Buyurtmalar!A3:CD').execute()
+        values = result.get('values', [])
+        data = []
+        for i in values:
+            if len(i) > 1 and i[1] == "🔵 yangi buyurtma":
+                data.append(i)
+        return data
     except HttpError as error:
         print(f"Error finding row: {error}")
         return None
@@ -291,6 +341,29 @@ async def addDData(column, values, table):
                 range_ = f"{table}!{value[1]}{next_empty_row}"
                 data = [[value[0]]]  # Wrap the value in a list for proper formatting
                 print(data)
+                sheets.values().update(
+                    spreadsheetId=SPREADSHEET_ID,
+                    range=range_,
+                    valueInputOption="RAW",
+                    body={"values": data}
+                ).execute()
+            return True
+        else:
+            print('error: No empty rows found')
+    except HttpError as error:
+        print(f"Error adding row: {error}")
+
+
+async def addDataa(values, table):
+    try:
+        service = getCreds()
+        sheets = service.spreadsheets()
+        next_empty_row = find_empty_row(sheets, table)
+        print("testetset", next_empty_row)
+        if next_empty_row:
+            for value in values:
+                range_ = f"{table}!{value[1]}{next_empty_row}"
+                data = [[value[0]]]
                 sheets.values().update(
                     spreadsheetId=SPREADSHEET_ID,
                     range=range_,

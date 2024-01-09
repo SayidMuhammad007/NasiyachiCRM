@@ -193,3 +193,29 @@ def Confirm():
         ]
     ])
     return btn
+
+def RequestBtn0():
+    btn = InlineKeyboardMarkup(row_width=2, inline_keyboard=[
+        [
+            InlineKeyboardButton(text="✅ Ha", callback_data="confirmYes"),
+        ]
+    ])
+    return btn
+
+def category(data):
+    keyboard = []
+    row = []  # Initialize an empty row
+    for i in data:
+        button = InlineKeyboardButton(text=i[0], callback_data=i[0])
+        row.append(button)
+
+        # Check if the row has reached the desired width (2 in this case)
+        if len(row) == 2:
+            keyboard.append(row)  # Add the row to the keyboard
+            row = []  # Reset the row
+
+    # If there are any remaining buttons in the row, add them
+    if row:
+        keyboard.append(row)
+
+    return InlineKeyboardMarkup(inline_keyboard=keyboard)

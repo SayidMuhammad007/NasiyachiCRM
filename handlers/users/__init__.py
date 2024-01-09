@@ -1,4 +1,5 @@
 from . import help
+from . import newPartner
 from . import start
 from . import daromadim
 from . import buyurtmalar
