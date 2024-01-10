@@ -10,11 +10,13 @@ from loader import dp, bot
 async def handle_product_deletion(callback_query: types.CallbackQuery):
     selected_order_id = callback_query.data.split('_')[1]
     order_id = await add_row(rows=[["B", int(selected_order_id) + 2, "⛔️ bekor qilindi"]], table="📒 Buyurtmalar")
+    text = await getNotifMsg(order_id, callback_query.from_user.id, callback_query.from_user.username)
+
     try:
-        text = await getNotifMsg(order_id, callback_query.from_user.id, callback_query.from_user.username)
+        await bot.send_message(chat_id=ADMIN_ID, text=text)
+
     except:
         pass
-    await bot.send_message(chat_id=ADMIN_ID, text=text)
     await bot.edit_message_text(
             chat_id=callback_query.message.chat.id,
             message_id=callback_query.message.message_id,
