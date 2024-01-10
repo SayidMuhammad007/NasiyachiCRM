@@ -18,7 +18,10 @@ async def handle_product_deletion(callback_query: types.CallbackQuery):
     if test[0][0][1] == "🔵 yangi buyurtma":
         add = await add_row(rows=[["D", int(test[0][0][0]) + 2, callback_query.from_user.id], ["B", int(test[0][0][0]) + 2, '🟠 konsultatsiya']],table="📒 Buyurtmalar")
         text = await getNotifMsg(add, callback_query.from_user.id, callback_query.from_user.username)
-        await bot.send_message(chat_id=ADMIN_ID, text=text)
+        try:
+            await bot.send_message(chat_id=ADMIN_ID, text=text)
+        except:
+            pass
     if test[0][0][1] == "🟠 konsultatsiya" or test[0][0][1] == "🔵 yangi buyurtma":
         check = test[0][0]
         print(check)
