@@ -107,8 +107,14 @@ async def id(message: types.Message, state:FSMContext):
             ["CD", int(orderId) + 2, screen],
         ]
         await add_row(rows=data,table="📒 Buyurtmalar")
-        notify = await getNotifMsg(int(orderId)+2, message.from_user.id, message.from_user.username)
-        await bot.send_message(chat_id=ADMIN_ID, text=notify)
+        try:
+            notify = await getNotifMsg(int(orderId)+2, message.from_user.id, message.from_user.username)
+        except:
+            pass
+        try:
+            await bot.send_message(chat_id=ADMIN_ID, text=notify)
+        except:
+            pass
         await message.answer(text="Tasdiqlandi")
     else:
         await message.answer(text="❌Bekor qilindi")

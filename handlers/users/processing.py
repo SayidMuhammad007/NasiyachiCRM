@@ -12,7 +12,10 @@ async def handle_product_deletion(callback_query: types.CallbackQuery):
     print(callback_query.data)
     add = await add_row(rows=[["B", int(selected_order_id) + 2, "🟡 rasmiylashtirilmoqda"]],table="📒 Buyurtmalar")
     text = await getNotifMsg(add, callback_query.from_user.id, callback_query.from_user.username)
-    await bot.send_message(chat_id=ADMIN_ID, text=text)
+    try:
+        await bot.send_message(chat_id=ADMIN_ID, text=text)
+    except:
+        pass
     test = await getData(value_to_find=selected_order_id, cur=0, table='📒 Buyurtmalar')
     if test:
         check = test[0]

@@ -281,6 +281,7 @@ async def add_row(rows, table):
 
 
 async def getNotifMsg(id, tg_id, username):
+
     data1 = await getData(int(id)-2, 0, "📒 Buyurtmalar")
     seller1 = await getData1(tg_id, 4, "👥 Xodimlar")
     print(f"{id}-{tg_id}-{username}")
