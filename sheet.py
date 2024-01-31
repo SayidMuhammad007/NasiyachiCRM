@@ -6,7 +6,7 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
 from loader import bot
-//007
+
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
 SPREADSHEET_ID = "1YKuxPvffbFM6WwXW8fy3Qjk8HE0ZsrHeBKkpuBmirhw"
 RANGE = '🧮 Kalkulyator!A:S'  # Update this to the desired range
