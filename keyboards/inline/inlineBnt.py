@@ -37,6 +37,9 @@ def Payment():
     btn = InlineKeyboardMarkup(row_width=2, inline_keyboard=[
         [
             InlineKeyboardButton(text="✅ To’lov qilindi", callback_data="moliya_0"),
+            InlineKeyboardButton(text="Summani o`zgartirish", callback_data="moliya_2"),
+        ],
+        [
             InlineKeyboardButton(text="⬅️ Ortga", callback_data="moliya_1"),
         ]
     ])
