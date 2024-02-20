@@ -28,26 +28,26 @@ async def handle_product_deletion(callback_query: types.CallbackQuery):
         msg = f"""
 Buyurtma tafsilotlari:
 
-👤 Mijoz:
-Ism: <b>{check[7]}</b> 
-Telefon raqam:<b>{check[10]}</b>
-UzumNasiyadan ro'yhatdan o'tgan telefon raqami: <b>{check[12]}</b>  
+<b>👤 Mijoz:</b>
+• Ism: <b>{check[7]}</b> 
+• Telefon raqam:<b>{check[10]}</b>
+• Kartaga ulangan raqam: <b>{check[12]}</b>  
 
-🛒 Buyurtma:
-Mahsulot nomi: <b>{check[22]}</b>
-Mahsulot narxi: <b>{check[28]}</b> 
-Nasiya narx: <b>{check[34]}</b> 
-Oylik to'lov: <b>{check[35]}</b> 
-Buyurtma holati: <b>{check[1]}</b> 
-Sana va vaqt: <b>{check[4]}</b>,<b>{check[77]}</b> 
+<b>🛒 Buyurtma:</b>
+• Mahsulot nomi: <b>{check[22]}</b>
+• Nasiya narx: <b>{check[34]}</b> 
+• Nasiya muddati: <b>{check[23]}</b> 
+• Oylik to'lov: <b>{check[35]}</b> 
+• Buyurtma holati: <b>{check[1]}</b> 
+• Sana va vaqt: <b>{check[4]}</b>,<b>{check[77]}</b> 
 
-📎 Fayllar:
-Mijozni mahsulot bilan tushgan rasmi: <b>{check[80]}</b> 
-Shartnoma skrinshoti: {'<b>' + check[81] + '</b>' if len(check) > 81 else ''}
+<b>📎 Fayllar:</b>
+• Mijozni mahsulot bilan tushgan rasmi: <b>{check[80]}</b> 
+• Shartnoma skrinshoti: {'<b>' + check[81] + '</b>' if len(check) > 81 else ''}
 
-🏢 Do'kon:
-Nomlanishi:<b>{check[21]}</b>
-Call-center: <b>{check[20]}</b>
+<b>🏢 Do'kon:</b>
+• Nomlanishi:<b>{check[21]}</b>
+• Call-center: <b>{check[20]}</b>
         """
         await bot.send_message(
                 chat_id=callback_query.message.chat.id,
@@ -59,27 +59,26 @@ Call-center: <b>{check[20]}</b>
         msg = f"""
 Buyurtma tafsilotlari:
 
-👤 Mijoz:
-Ism: <b>{check[7]}</b> 
-Telefon raqam:<b>{check[10]}</b>
-UzumNasiyadan ro'yhatdan o'tgan telefon raqami: <b>{check[12]}</b>  
+<b>👤 Mijoz:</b>
+• Ism: <b>{check[7]}</b> 
+• Telefon raqam:<b>{check[10]}</b>
+• Kartaga ulangan raqam: <b>{check[12]}</b>  
 
-🛒 Buyurtma:
-Mahsulot nomi: <b>{check[22]}</b>
-Mahsulot narxi: <b>{check[28]}</b> 
-Nasiya narx: <b>{check[34]}</b> 
-Oylik to'lov: <b>{check[35]}</b> 
-Bo’lib to’lash muddati:: <b>{check[23]}</b> 
-Buyurtma holati: <b>{check[1]}</b> 
-Sana va vaqt: <b>{check[4]}</b>,<b>{check[77]}</b> 
+<b>🛒 Buyurtma:</b>
+• Mahsulot nomi: <b>{check[22]}</b>
+• Nasiya narx: <b>{check[34]}</b> 
+• Nasiya muddati: <b>{check[23]}</b> 
+• Oylik to'lov: <b>{check[35]}</b> 
+• Buyurtma holati: <b>{check[1]}</b> 
+• Sana va vaqt: <b>{check[4]}</b>,<b>{check[77]}</b> 
 
-📎 Fayllar:
-Mijozni mahsulot bilan tushgan rasmi: <b>{check[80]}</b> 
-Shartnoma skrinshoti: {'<b>' + check[81] + '</b>' if len(check) > 81 else ''}
+<b>📎 Fayllar:</b>
+• Mijozni mahsulot bilan tushgan rasmi: <b>{check[80]}</b> 
+• Shartnoma skrinshoti: {'<b>' + check[81] + '</b>' if len(check) > 81 else ''}
 
-🏢 Do'kon:
-Nomlanishi:<b>{check[21]}</b>
-Call-center: <b>{check[20]}</b>
+<b>🏢 Do'kon:</b>
+• Nomlanishi:<b>{check[21]}</b>
+• Call-center: <b>{check[20]}</b>
                 """
         await bot.send_message(
             chat_id=callback_query.message.chat.id,

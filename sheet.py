@@ -195,6 +195,21 @@ async def getAll(table):
         print(f"Error finding row: {error}")
         return None
 
+async def getAllMarkets(table):
+    try:
+        service = getCreds()
+        sheets = service.spreadsheets()
+        result = sheets.values().get(spreadsheetId=SPREADSHEET_ID, range=f'{table}!A3:FF').execute()
+        values = result.get('values', [])
+        data = []
+        for row in values:
+            if row and len(row) > 58:
+                data.append(row)
+        return data
+    except HttpError as error:
+        print(f"Error finding row: {error}")
+        return None
+
 async def find_orders(value_to_find, cur, table, user_id):
     try:
         service = getCreds()

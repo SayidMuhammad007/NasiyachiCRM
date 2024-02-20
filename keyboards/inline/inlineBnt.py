@@ -68,13 +68,13 @@ def menejer():
 def btn1(id):
     keyboard = InlineKeyboardMarkup(inline_keyboard=[
         [
-            InlineKeyboardButton(text="🟡RASMIYLASHTIRILMOQDA", callback_data=f"rasmiy_{id}")
+            InlineKeyboardButton(text="🟡 RASMIYLASHTIRILMOQDA", callback_data=f"rasmiy_{id}")
         ],
         [
-            InlineKeyboardButton(text="❌BEKOR QILINDI", callback_data=f"cancel_{id}")
+            InlineKeyboardButton(text="❌ BEKOR QILINDI", callback_data=f"cancel_{id}")
         ],
         [
-            InlineKeyboardButton(text="⛔️SOTILMADI", callback_data=f"notsell_{id}")
+            InlineKeyboardButton(text="⛔ ️SOTILMADI", callback_data=f"notsell_{id}")
         ]
     ])
     return keyboard
@@ -85,7 +85,7 @@ def btn2(id):
             InlineKeyboardButton(text="⚪️ RASMIYLASHTIRILDI", callback_data=f"finish_{id}")
         ],
         [
-            InlineKeyboardButton(text="❌BEKOR QILINDI", callback_data=f"cancel_{id}")
+            InlineKeyboardButton(text="❌ BEKOR QILINDI", callback_data=f"cancel_{id}")
         ]
     ])
     return keyboard

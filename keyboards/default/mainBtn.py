@@ -48,7 +48,8 @@ adminBtn = ReplyKeyboardMarkup(
 PayBtn = ReplyKeyboardMarkup(
     [
         [
-            KeyboardButton(text='📄 To’lovlar'),
+            KeyboardButton(text="🏢 Hamkor-do'konlar"),
+            KeyboardButton(text="📋 To'lov hisoblari"),
         ],
         [
             KeyboardButton(text="⬅️ Orqaga")
@@ -65,6 +66,7 @@ async def markets(data):
             button = KeyboardButton(text=button_text)
             keyboard.insert(button)
     return keyboard
+
 
 async def cancel(data, id):
     keyboard = InlineKeyboardMarkup(row_width=1)

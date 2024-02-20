@@ -36,7 +36,7 @@ async def bot_start(message: types.Message, state:FSMContext):
 @dp.message_handler(lambda message: not re.match(phone_pattern, message.text), state=Order.phone)
 async def invalid_phone_format(message: types.Message):
     await message.answer(
-        "Noto`g`ri formatda yozdingiz!(907758032)")
+        "<b>⚠️ Iltimos, telefon raqamni quyidagi formatda kiriting: 912345678</b>")
 
 
 @dp.message_handler(lambda message: re.match(phone_pattern, message.text), state=Order.phone)

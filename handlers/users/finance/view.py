@@ -20,7 +20,7 @@ data = []
 current_page = 0
 
 # Echo bot
-@dp.message_handler(text='📄 To’lovlar')
+@dp.message_handler(text="🏢 Hamkor-do'konlar")
 async def bot_echo(message: types.Message):
     global data
     global current_page
@@ -122,3 +122,56 @@ Pastdagi subyekt va obyektlarga to’lov qilish kerak. <b>Bittasini tanlang</b>!
     # markup.row(InlineKeyboardButton('🔄 Yangilash', callback_data='refresh0001'))
     return text, markup
 
+def generate_message_text_default(start_idx, end_idx, data):
+    # Check if there is any data to display
+    if not data:
+        return "🙁 Hozir yangi buyurtmalar yo'q. Iltimos, sal chidab turing!", None
+
+    # Create the message text with order IDs
+    t = 0
+    for i in range(start_idx, end_idx):
+        t += 1
+        if t > ITEMS_PER_PAGE or i >= len(data):
+            break
+    text = f"""
+Pastdagi subyekt va obyektlarga to’lov qilish kerak. <b>Bittasini tanlang</b>!
+"""
+
+    # Check if there are more pages
+    has_previous_page = start_idx > 0
+    has_next_page = end_idx < len(data)
+
+    # Create an inline keyboard for navigation
+    markup = InlineKeyboardMarkup()
+    keyboard = []
+    row = []  # Initialize an empty row
+    for i in range(start_idx, end_idx):
+        if i >= len(data):
+            break
+        button = InlineKeyboardButton(text=f"{data[i][6]}: {data[i][25]} so`m", callback_data=f"partnerMoney_{data[i][0]}")
+        row.append(button)
+
+        # Check if the row has reached the desired width (1 in this case)
+        if len(row) == 1:
+            keyboard.append(row)  # Add the row to the keyboard
+            row = []  # Reset the row
+
+    # If there are any remaining buttons in the row, add them
+    if row:
+        keyboard.append(row)
+
+    markup.inline_keyboard = keyboard
+
+    # Add "Previous" button if available
+    if has_previous_page:
+        markup.row(InlineKeyboardButton("⬅️ Oldingilari", callback_data="prev0001"))
+
+    # Add "Next" button if available
+    if has_next_page:
+        if has_previous_page:
+            markup.insert(InlineKeyboardButton("Keyingilari ➡️", callback_data="next0001"))
+        else:
+            markup.add(InlineKeyboardButton("Keyingilari ➡️", callback_data="next0001"))
+
+    # markup.row(InlineKeyboardButton('🔄 Yangilash', callback_data='refresh0001'))
+    return text, markup

@@ -3,7 +3,8 @@ import datetime
 from aiogram import types
 from aiogram.dispatcher import FSMContext
 
-from handlers.users.finance.view import current_page, ITEMS_PER_PAGE, generate_message_text
+from handlers.users.finance.view import current_page, ITEMS_PER_PAGE, generate_message_text_default
+
 from keyboards.default.mainBtn import menuBtn, PayBtn
 from keyboards.inline.inlineBnt import Moliya
 from loader import dp
@@ -50,15 +51,13 @@ async def get_partner_phone(callback: types.CallbackQuery, state: FSMContext):
 
     formatted_price = price.replace("\xa0", "").replace(",", ".")
     price_float = float(formatted_price)
-    print("id",id,"img", img)
     await addDData("d", [[partner, "B"], [img, "G"], [id, "F"], [price_float, "E"], [date, 'H'], [time, 'I']], "💸 To'lovlar")
     await loading_message.delete()
     await callback.message.answer(f"✅ Qabul qilindi, rahmat!")
     await state.finish()
-    from handlers.users.finance.view import data
     data = await getAllHaveValueOne("🏢 Hamkor-do'konlar", "A3:CC", 26, 1)
     start_idx = current_page * ITEMS_PER_PAGE
     end_idx = (current_page + 1) * ITEMS_PER_PAGE
 
-    text, markup = generate_message_text(start_idx, end_idx)
+    text, markup = generate_message_text_default(start_idx, end_idx, data)
     await callback.message.answer(text=text, reply_markup=markup)
