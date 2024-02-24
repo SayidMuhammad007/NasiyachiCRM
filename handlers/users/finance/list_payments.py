@@ -28,6 +28,7 @@ async def handle_product_deletion(callback_query: types.CallbackQuery, state:FSM
     await state.update_data({'selected_row' : selected})
     data = await getData1(selected, 14, "📋 To'lov hisoblari")
     data = data[0]
+    await state.update_data({'price': data[10]})
     msg = f"""
 <b>To’lov:</b>
 • Nomlanishi: <b>{data[2]}</b>
@@ -36,7 +37,6 @@ async def handle_product_deletion(callback_query: types.CallbackQuery, state:FSM
         """
     await state.update_data({'mainId': data[0]})
     await state.update_data({'id': data[14]})
-    await state.update_data({'price':data[15]})
     await callback_query.message.answer(text=msg, reply_markup=Payment())
     await callback_query.message.edit_text("Tanlang!!")
     await PaymenState1.change.set()
@@ -46,8 +46,8 @@ async def handle_product_deletion(callback_query: types.CallbackQuery, state:FSM
 async def handle_product_deletion(callback_query: types.CallbackQuery, state:FSMContext):
     if callback_query.data == 'moliya_0':
         msg = """
-        🖼 Iltimos, to’lov <b>skrinshotini</b> yuboring!
-        • Ma’lumot formati: <b>JPG</b> yoki <b>JPEG</b>!
+🖼 Iltimos, to’lov <b>skrinshotini</b> yuboring!
+• Ma’lumot formati: <b>JPG</b> yoki <b>JPEG</b>!
             """
         await callback_query.message.edit_text(text=msg)
         await PaymenState1.img.set()
