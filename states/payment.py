@@ -7,3 +7,11 @@ class PaymenState(StatesGroup):
     confirming = State()
     img = State()
     id = State()
+
+class PaymenState1(StatesGroup):
+    partnerId = State()
+    price = State()
+    change = State()
+    confirming = State()
+    img = State()
+    id = State()

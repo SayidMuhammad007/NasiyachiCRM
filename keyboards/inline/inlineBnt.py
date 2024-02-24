@@ -31,6 +31,16 @@ async def Penalty(data):
 
     return InlineKeyboardMarkup(inline_keyboard=keyboard)
 
+async def paymentDataBtn(data):
+    keyboard = []
+
+    for i in data:
+        if len(i) > 14 and i[14]:
+            button = InlineKeyboardButton(text=f"{i[2]} - {i[10]} so`m", callback_data=f"paymentData_{i[14]}")
+            keyboard.append([button])  # Append a new row with a single button
+
+    return InlineKeyboardMarkup(inline_keyboard=keyboard)
+
 
 
 def Payment():

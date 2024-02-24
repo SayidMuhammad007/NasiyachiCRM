@@ -111,6 +111,23 @@ async def getData2(value_to_find, cur, table):
         print(f"Error finding row: {error}")
         return None
 
+
+async def getPaymentData():
+    try:
+        service = getCreds()
+        sheets = service.spreadsheets()
+        result = sheets.values().get(spreadsheetId=SPREADSHEET_ID, range=f'📋 To\'lov hisoblari!A3:CC').execute()
+        values = result.get('values', [])
+        data = []
+        for row in values:
+            if row and len(row) > 14 and row[14]:
+                data.append(row)
+        return data
+    except HttpError as error:
+        print(f"Error finding row: {error}")
+        return None
+
+
 async def getDataNew(value_to_find, cur, table):
     try:
         service = getCreds()  # Assuming getCreds() is defined correctly
